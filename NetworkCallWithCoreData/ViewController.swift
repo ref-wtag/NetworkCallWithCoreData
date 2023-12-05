@@ -57,6 +57,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }.resume()
     }
     
+
+    func saveData(){
+        let newProducts = Products(context: context)
+        
+        for i in response{
+            newProducts.title = i.title
+            newProducts.price = i.price
+            newProducts.descrip = i.description
+            newProducts.category = i.category
+            newProducts.image = i.image
+            newProducts.rate = i.rating.rate
+            newProducts.count = i.rating.count
+        }
+        do{
+            try context.save()
+        }catch{
+            print("failed to save data")
+        }
+    }
+    
     func getData(){
         do {
             modelData = try context.fetch(Products.fetchRequest())
@@ -68,23 +88,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    func saveData(){
-        let newProducts = Products(context: context)
-        newProducts.title = response[0].title
-        newProducts.price = response[0].price
-        newProducts.descrip = response[0].description
-        newProducts.category = response[0].category
-        newProducts.image = response[0].image
-        newProducts.rate = response[0].rating.rate
-        newProducts.count = response[0].rating.count
-        
-        do{
-            try context.save()
-        }catch{
-            
-        }
-        
-    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return response.count
@@ -92,14 +95,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! HelperTableViewCell
-        if indexPath.row < response.count{
-            cell.id.text = String(response[indexPath.row].id)
-            cell.title.text = String(response[indexPath.row].title)
-            cell.price.text = String(response[indexPath.row].price)
-            cell.des.text = response[indexPath.row].description
-            cell.category.text = response[indexPath.row].category
-            cell.rate.text = String(response[indexPath.row].rating.rate)
-            cell.count.text = String(response[indexPath.row].rating.count)
+       
+        if indexPath.row < modelData.count{
+            
+            //cell.id.text = String(modelData[indexPath.row].id)
+            cell.title.text = modelData[indexPath.row].title
+            cell.price.text = String(modelData[indexPath.row].price)
+            cell.des.text = modelData[indexPath.row].descrip
+            cell.category.text = modelData[indexPath.row].category
+            cell.rate.text = String(modelData[indexPath.row].rate)
+            cell.count.text = String(modelData[indexPath.row].count)
             //cell.myImage.image = UIImage(String(res[indexPath.row].image))
             cell.myImage.backgroundColor = .red
             //print("executing this block")
