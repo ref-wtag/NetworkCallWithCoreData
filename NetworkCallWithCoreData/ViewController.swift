@@ -42,6 +42,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             do{
                 self.response = try JSONDecoder().decode([Response].self, from: data)
                 self.saveData()
+                self.getData()
                 
             }catch{
                 self.getData()
@@ -59,9 +60,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
 
     func saveData(){
-        let newProducts = Products(context: context)
+       
         
         for i in response{
+            let newProducts = Products(context: context)
             newProducts.title = i.title
             newProducts.price = i.price
             newProducts.descrip = i.description
@@ -96,6 +98,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! HelperTableViewCell
        
+        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        debugPrint(path[0])
+        print("\n")
+        
         if indexPath.row < modelData.count{
             
             //cell.id.text = String(modelData[indexPath.row].id)
