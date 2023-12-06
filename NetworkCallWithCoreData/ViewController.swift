@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
@@ -26,7 +27,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let urlString = "https://fakestoreapi.com/products"
         fetchData(with : urlString)
-        //getData()
        
     }
     
@@ -60,17 +60,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
 
     func saveData(){
-       
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Products")
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do{
+            try context.execute(batchDeleteRequest)
+            try context.save()
+        }
+        catch{
+            print("no data to delete from database")
+        }
+        
         
         for i in response{
             let newProducts = Products(context: context)
+            newProducts.pId = Int16(i.id)
             newProducts.title = i.title
             newProducts.price = i.price
             newProducts.descrip = i.description
             newProducts.category = i.category
             newProducts.image = i.image
             newProducts.rate = i.rating.rate
-            newProducts.count = i.rating.count
+            newProducts.count = Int16(i.rating.count)
         }
         do{
             try context.save()
@@ -90,6 +102,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return response.count
@@ -104,21 +119,47 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if indexPath.row < modelData.count{
             
-            //cell.id.text = String(modelData[indexPath.row].id)
-            cell.title.text = modelData[indexPath.row].title
-            cell.price.text = String(modelData[indexPath.row].price)
-            cell.des.text = modelData[indexPath.row].descrip
-            cell.category.text = modelData[indexPath.row].category
-            cell.rate.text = String(modelData[indexPath.row].rate)
-            cell.count.text = String(modelData[indexPath.row].count)
-            //cell.myImage.image = UIImage(String(res[indexPath.row].image))
-            cell.myImage.backgroundColor = .red
-            //print("executing this block")
+            cell.id.text =  String(response[indexPath.row].id)
+            cell.title.text = response[indexPath.row].title
+            cell.price.text = String(response[indexPath.row].price)
+            cell.des.text = response[indexPath.row].description
+            cell.category.text = response[indexPath.row].category
+            cell.rate.text = String(response[indexPath.row].rating.rate)
+            cell.count.text = String(response[indexPath.row].rating.count)
+            
+            let imageUrlString = response[indexPath.row].image
+            let imageUrl = URL(string : imageUrlString)
+            
+            URLSession.shared.dataTask(with: imageUrl!) { data, _ , error in
+                if let imageData = data, let image = UIImage(data : imageData){
+                    DispatchQueue.main.async {
+                        cell.myImage.image = image
+                    }
+                }
+            }.resume()
+            
+            
+//            if let imageUrlString = response[indexPath.row].image,
+//               let imageUrl = URL(string: imageUrlString) {
+//                
+//                URLSession.shared.dataTask(with: imageUrl) { data, _, error in
+//                    if let error = error {
+//                        print("Error loading image: \(error)")
+//                        return
+//                    }
+//                    
+//                    if let imageData = data, let image = UIImage(data: imageData) {
+//                        DispatchQueue.main.async {
+//                            cell.myImage.image = image
+//                        }
+//                    }
+//                }.resume()
+//                
+//            }
         }
         return cell
     }
 }
-
 
 struct Response : Codable {
     let id : Int
@@ -132,6 +173,6 @@ struct Response : Codable {
 
 struct Rating : Codable {
     let rate : Double
-    let count : Double
+    let count : Int
 }
 

@@ -16,28 +16,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="FP9-JQ-syg">
-                                <rect key="frame" x="50" y="109" width="293" height="659"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="852-bZ-BRA">
-                                        <rect key="frame" x="0.0" y="50" width="293" height="43.666667938232422"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="852-bZ-BRA" id="x1l-ro-4Bc">
-                                            <rect key="frame" x="0.0" y="0.0" width="293" height="43.666667938232422"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="FP9-JQ-syg">
+                                <rect key="frame" x="0.0" y="110" width="393" height="742"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <sections/>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rqp-gL-bWF">
+                                <rect key="frame" x="20" y="79" width="353" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="FP9-JQ-syg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="1BZ-PC-yPL"/>
-                            <constraint firstItem="FP9-JQ-syg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="1dt-u9-vH3"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="FP9-JQ-syg" secondAttribute="bottom" constant="50" id="MXq-Vh-U55"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FP9-JQ-syg" secondAttribute="trailing" constant="50" id="S0a-AE-vDB"/>
+                            <constraint firstItem="Rqp-gL-bWF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="2wV-5p-Hnt"/>
+                            <constraint firstAttribute="bottom" secondItem="FP9-JQ-syg" secondAttribute="bottom" id="61d-JQ-3jE"/>
+                            <constraint firstItem="FP9-JQ-syg" firstAttribute="top" secondItem="Rqp-gL-bWF" secondAttribute="bottom" constant="10" id="7z6-j3-GgF"/>
+                            <constraint firstItem="FP9-JQ-syg" firstAttribute="centerX" secondItem="Rqp-gL-bWF" secondAttribute="centerX" id="9Dp-aB-ElT"/>
+                            <constraint firstItem="FP9-JQ-syg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="IHJ-wd-qZR"/>
+                            <constraint firstItem="Rqp-gL-bWF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WcU-cd-AEi"/>
+                            <constraint firstItem="Rqp-gL-bWF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="YRU-4V-KKU"/>
                         </constraints>
                     </view>
                     <connections>
@@ -46,7 +46,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="-27"/>
+            <point key="canvasLocation" x="130.53435114503816" y="-27.464788732394368"/>
         </scene>
     </scenes>
     <resources>
