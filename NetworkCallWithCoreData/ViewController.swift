@@ -56,8 +56,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.tableView.reloadData()
             }
             
-            print(self.response[0].title)
-            
+          //print(self.response[0].title)
+         
         }.resume()
     }
     
@@ -147,7 +147,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     }
                 }
             }.resume()
-            
         }
         return cell
     }
