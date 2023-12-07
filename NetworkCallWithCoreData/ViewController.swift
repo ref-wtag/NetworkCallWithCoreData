@@ -109,6 +109,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedRow = tableView.cellForRow(at: indexPath)
+        productDetails(indexPath)
+       
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return response.count
@@ -142,26 +148,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }
             }.resume()
             
-            
-//            if let imageUrlString = response[indexPath.row].image,
-//               let imageUrl = URL(string: imageUrlString) {
-//                
-//                URLSession.shared.dataTask(with: imageUrl) { data, _, error in
-//                    if let error = error {
-//                        print("Error loading image: \(error)")
-//                        return
-//                    }
-//                    
-//                    if let imageData = data, let image = UIImage(data: imageData) {
-//                        DispatchQueue.main.async {
-//                            cell.myImage.image = image
-//                        }
-//                    }
-//                }.resume()
-//                
-//            }
         }
         return cell
+    }
+    
+    
+    func productDetails(_ index : IndexPath){
+        
+        let vc = self.storyboard?.instantiateViewController(identifier: "ProductDetailsViewController") as! ProductDetailsViewController
+       
+        vc.productTitleVal = response[index.row].title
+        vc.priceVal = response[index.row].price
+        vc.desVal = response[index.row].description
+        vc.rateVal = response[index.row].rating.rate
+        vc.countVal = response[index.row].rating.count
+        vc.myImageVal = response[index.row].image
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
