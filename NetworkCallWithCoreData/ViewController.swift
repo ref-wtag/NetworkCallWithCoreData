@@ -11,6 +11,8 @@ import CoreData
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
     @IBOutlet var tableView : UITableView!
+    @IBOutlet var activityIndicator : UIActivityIndicatorView!
+    
     var response : [Response] = []
     var modelData = [Products]()
     
@@ -18,6 +20,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.activityIndicator.startAnimating()
         
         let nib = UINib(nibName: "HelperTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "cell")
@@ -96,6 +99,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             modelData = try context.fetch(Products.fetchRequest())
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                self.activityIndicator.isHidden = true
             }
         }catch{
             print("could not get any data from database")
