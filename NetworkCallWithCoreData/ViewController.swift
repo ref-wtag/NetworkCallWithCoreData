@@ -113,6 +113,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedRow = tableView.cellForRow(at: indexPath)
         productDetails(indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
        
     }
 
@@ -129,13 +130,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if indexPath.row < modelData.count{
             
-            cell.id.text =  String(response[indexPath.row].id)
             cell.title.text = response[indexPath.row].title
-            cell.price.text = String(response[indexPath.row].price)
-            cell.des.text = response[indexPath.row].description
+            cell.price.text = "$\(response[indexPath.row].price)  "
             cell.category.text = response[indexPath.row].category
-            cell.rate.text = String(response[indexPath.row].rating.rate)
-            cell.count.text = String(response[indexPath.row].rating.count)
+            cell.rate.text = "  \(response[indexPath.row].rating.rate)"
+            cell.count.text = "(\(response[indexPath.row].rating.count))"
             
             let imageUrlString = response[indexPath.row].image
             let imageUrl = URL(string : imageUrlString)

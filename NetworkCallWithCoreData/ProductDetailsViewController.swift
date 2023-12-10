@@ -29,10 +29,10 @@ class ProductDetailsViewController: UIViewController {
         super.viewDidLoad()
 
         productTitle.text = productTitleVal
-        price.text = String(priceVal)
+        price.text = "$\(priceVal)   "
         des.text = desVal
-        rate.text = String(rateVal)
-        count.text = "\(countVal)"
+        rate.text = " \(rateVal)"
+        count.text = "(\(countVal))"
     
         
         let imageUrlString = myImageVal

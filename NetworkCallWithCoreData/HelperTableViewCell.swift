@@ -9,14 +9,12 @@ import UIKit
 
 class HelperTableViewCell: UITableViewCell {
 
-    @IBOutlet var id : UILabel!
-    @IBOutlet var title : UILabel!
     @IBOutlet var price : UILabel!
-    @IBOutlet var des : UILabel!
     @IBOutlet var category : UILabel!
     @IBOutlet var rate : UILabel!
     @IBOutlet var count : UILabel!
     @IBOutlet var myImage : UIImageView!
+    @IBOutlet var title : UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
